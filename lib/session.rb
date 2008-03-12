@@ -3,9 +3,9 @@ module Viddler
     attr_reader :session_id, :api_key
     
     def self.create(api_key = nil, user = nil, password = nil)
-      api_key ||= self.api_key
-      user ||= self.secret_key
-      password ||= self.password
+      api_key  ||= ENV['VIDDLER_API_KEY']
+      user     ||= ENV['VIDDLER_API']
+      password ||= ENV['VIDDLER_PASSWORD']
       raise ArgumentError if api_key.nil? || user.nil? || password.nil?
       new(api_key, user, password)
     end

@@ -43,11 +43,13 @@ module Viddler
         11  => Viddler::Session::MethodRestrictedBySecurityLevel,
         12  => Viddler::Session::APIKeyDisabled
       }
+      
       def self.process(data)
-        response_element = element('error_response', data) rescue nil
+        response_element = element('error', data) rescue nil
         if response_element
-          hash = hashinate(response_element)
-          raise EXCEPTIONS[Integer(hash['error_code'])].new(hash['error_msg'])
+          code = response_element.search('code').inner_html.to_i
+          description = response_element.search('description').inner_html
+          raise EXCEPTIONS[code], "Error #{code}- #{description}"
         end
       end
     end
