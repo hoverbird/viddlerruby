@@ -9,13 +9,29 @@ module Viddler
     
     def self.element(name, data)
       data = data.body rescue data # either data or an HTTP response
-      doc = Hpricot(data)
+      doc = Hpricot.XML(data)
       doc.search(name) do |element|
         return element
       end
       raise "Element #{name} not found in #{data}"
     end
+    
+    def self.hash_or_value_for(element)
+      if element.children.size == 1 && element.children.first.kind_of?(REXML::Text)
+        element.text_value
+      else
+        hashinate(element)
+      end
+    end
 
+    def self.hashinate(response_element)
+      hash = {}
+      response_element.children.reject{|e| e.kind_of? Hpricot::Text}.each do |elem|
+        hash[elem.name.to_sym] = elem.inner_html
+      end
+      hash
+    end
+  
     class UsersAuth < Parser
       def self.process(data)
         element("sessionid", data).inner_html
@@ -24,9 +40,14 @@ module Viddler
     
     class VideosUpload < Parser
       def self.process(data)
-        element("video", data).inner_html
+        hashinate(element("video", data))
       end
     end
+    
+    PARSERS = {
+      'viddler.users.auth' => UsersAuth,
+      'viddler.videos.upload' => VideosUpload
+    }
     
     class Errors < Parser
       EXCEPTIONS = {
@@ -53,12 +74,6 @@ module Viddler
         end
       end
     end
-    
-    PARSERS = {
-      'viddler.users.auth' => UsersAuth,
-      'viddler.videos.upload' => VideosUpload
-    }
-  
   end
   
   

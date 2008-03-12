@@ -8,9 +8,6 @@ rescue LoadError
   exit
 end
 
-#RAILS_ROOT=File.join(File.dirname(__FILE__),'..','..')
-#require "#{RAILS_ROOT}/viddler/lib/viddler"
-
 $LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'lib')
 require 'viddler'
 
@@ -35,12 +32,14 @@ class Test::Unit::TestCase
     <<-XML
     <?xml version="1.0" encoding="UTF-8"?>
     <video>
-      <id>31164</sessionid>
-      <title>Testy Von Video</sessionid>
-      <url>http://viddler.com.31164</sessionid>
+      <id>49e63783</id>
+      <title>Test upload</title>
+      <description>test upload description</description>
+      <tags>tubemogul upload test</tags>
+      <url>http://www.viddler.com/explore/username/videos/118/</url>
+      <thumbnail_url>http://cdn-ll-83.viddler.com/e2/thumbnail_2_49e63783.jpg</thumbnail_url>
     </video>
     XML
-    
   end
   
 end
