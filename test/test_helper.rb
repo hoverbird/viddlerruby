@@ -31,4 +31,16 @@ class Test::Unit::TestCase
     XML
   end
   
+  def example_video_upload_response_xml
+    <<-XML
+    <?xml version="1.0" encoding="UTF-8"?>
+    <video>
+      <id>31164</sessionid>
+      <title>Testy Von Video</sessionid>
+      <url>http://viddler.com.31164</sessionid>
+    </video>
+    XML
+    
+  end
+  
 end

@@ -3,22 +3,31 @@ require File.dirname(__FILE__) + '/test_helper.rb'
 context "Uploading a new Video" do
   
   setup do
-    @api_key = "0117f0f29783474f55524d45544c4942524152595f"
-    @user = "gourmetlibrary"
-    @password = "cheeselib69"
-    
     @file =  File.open(File.dirname(__FILE__) + "/test.mov", 'r')
+    #@file_mock = mock('file')
+    #@session_mock = mock('session')
+    #@session_mock.expects(:api_key).returns('123456789')
+    #@session_mock.expects(:session_id).returns('987654321')
+    @api_key = "02298e0f29733474555524d45544c4942514152646c"
+    @user = "viddler_tester"
+    @password = "secret"
     #Net::HTTP.expects(:post_form).returns(example_auth_response_xml)
     @session = Viddler::Session.create(@api_key, @user, @password)
     
-    @video = Viddler::Video.post(@session, {:title => "A Rad API Test Video",
-                                            :description => "Ain't it swell?",
-                                            :tags => 'gourmetlibrary test api',
-                                            :make_public => true,
-                                            :file => @file})
+    
+    Net::HTTP.expects(:post_form).returns(example_video_upload_response_xml)
+    
+    @video = Viddler::Video.post(@session, @file.read, { :title => "A Rad API Test Video",
+                                                              :description => "Ain't it swell?",
+                                                              :tags => 'gourmetlibrary test api',
+                                                              :make_public => true } )
   end
   
-  specify "wexleydale" do
+  specify "should return a Video object" do
     @video.should.be.kind_of? Viddler::Video
+  end
+  
+  specify "should populate the title of the Video" do
+    @video.title.should.eqaul "Testy Von Video"
   end
 end

@@ -9,7 +9,6 @@ module Viddler
     
     def self.element(name, data)
       data = data.body rescue data # either data or an HTTP response
-      debugger
       doc = Hpricot(data)
       doc.search(name) do |element|
         return element
