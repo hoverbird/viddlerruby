@@ -13,15 +13,15 @@ context "Authenticating with Viddler" do
     @session.should.be.kind_of Viddler::Session
   end
   
-  specify "should have a session_id" do
+  specify "should have be assigned a session_id" do
     @session.session_id.should.not.be nil
   end
   
-  specify "should have an API key" do
+  specify "should store the API key" do
     @session.api_key.should.equal ENV['VIDDLER_API_KEY']
   end
   
-  specify "should have a username" do
+  specify "should store the username" do
     @session.api_key.should.equal ENV['VIDDLER_USERNAME']
   end
   

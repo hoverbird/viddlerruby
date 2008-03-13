@@ -4,7 +4,7 @@ module Viddler
     
     def self.create(api_key = nil, user = nil, password = nil)
       api_key  ||= ENV['VIDDLER_API_KEY']
-      user     ||= ENV['VIDDLER_API']
+      user     ||= ENV['VIDDLER_USERNAME']
       password ||= ENV['VIDDLER_PASSWORD']
       raise ArgumentError if api_key.nil? || user.nil? || password.nil?
       new(api_key, user, password)
