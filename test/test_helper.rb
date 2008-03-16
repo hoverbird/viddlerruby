@@ -4,11 +4,10 @@ begin
   require 'mocha'
   require 'test/spec'
 rescue LoadError
-  puts "=> You need the mocha, test-spec and ruby-debug gems to run these tests."
-  exit
+  abort "=> You need the mocha, test-spec and ruby-debug gems to run these tests."
 end
 
-$LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'lib')
+$:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 require 'viddler'
 
 class Test::Unit::TestCase

@@ -1,20 +1,9 @@
 require File.dirname(__FILE__) + '/../test_helper.rb'
 
-context "Authenticating with Viddler" do
-  # Must set your API_KEY, VIDDLER_USERNAME and VIDDLER_PASSWORD in ENV
+context "Authenticating with Viddler credentials stored in environment variable" do
   setup do
-   #@api_key = '0117f0f19d4b474f55524d45544c4942524152593bd'
-   #@user = "gourmetlibrary"
-   #@password = "cheeselib69"
+    # see the other session_test.rb for how credentials can be passed as arguments
     @session = Viddler::Session.create()
-  end
-
-  specify "should be a Viddler::Session" do
-    @session.should.be.kind_of Viddler::Session
-  end
-  
-  specify "should have be assigned a session_id" do
-    @session.session_id.should.not.be nil
   end
   
   specify "should store the API key" do
@@ -25,7 +14,8 @@ context "Authenticating with Viddler" do
     @session.api_key.should.equal ENV['VIDDLER_USERNAME']
   end
   
-  specify "should return a successful response" do
+  specify "should have be assigned a session_id" do
+    @session.session_id.should.not.be nil
   end
   
 end

@@ -2,7 +2,7 @@ module Viddler
   class Parser
     
     def self.parse(method, data)
-      Errors.process(data)
+      Errors.process(method, data)      
       parser = Parser::PARSERS[method]
       parser.process(data)
     end
@@ -65,12 +65,13 @@ module Viddler
         12  => Viddler::Session::APIKeyDisabled
       }
       
-      def self.process(data)
+      def self.process(method, data)
         response_element = element('error', data) rescue nil
         if response_element
           code = response_element.search('code').inner_html.to_i
           description = response_element.search('description').inner_html
-          raise EXCEPTIONS[code], "Error #{code}- #{description}"
+          details = response_element.search('details').inner_html
+          raise EXCEPTIONS[code], "Error #{code} while executing #{method}: #{description}. #{details}"
         end
       end
     end
