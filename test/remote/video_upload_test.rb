@@ -3,8 +3,8 @@ require File.dirname(__FILE__) + '/../test_helper.rb'
 context "Uploading a new Video" do
   
   setup do
-    @session = Viddler::Session.create()        
-    @data =  File.read(File.dirname(__FILE__) + "test.mov", 'r')
+    @session = Viddler::Session.create()    
+    @data =  File.read(File.dirname(__FILE__) + "/test.mov")
     @video = Viddler::Video.post(@session, @data, {  :title => "A Radool API Test Video",
                                                      :description => "Ain't it swell?",
                                                      :tags => 'not_for_reals test api',

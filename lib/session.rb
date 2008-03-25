@@ -1,6 +1,6 @@
 module Viddler
   class Session
-    attr_reader :session_id, :api_key
+    attr_reader :session_id, :api_key, :user
     
     def self.create(api_key = nil, user = nil, password = nil)
       api_key  ||= ENV['VIDDLER_API_KEY']

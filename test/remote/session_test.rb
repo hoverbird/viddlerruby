@@ -11,7 +11,7 @@ context "Authenticating with Viddler credentials stored in environment variable"
   end
   
   specify "should store the username" do
-    @session.api_key.should.equal ENV['VIDDLER_USERNAME']
+    @session.user.should.equal ENV['VIDDLER_USERNAME']
   end
   
   specify "should have be assigned a session_id" do
