@@ -1,7 +1,7 @@
 module Viddler
   require 'hpricot'
-  require 'net/http'
   require 'net/http_multipart_post'
+  require 'net/http'
 
   require 'session'
   require 'video'

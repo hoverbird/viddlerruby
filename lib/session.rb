@@ -19,6 +19,14 @@ module Viddler
       Viddler::Parser.parse(params[:method], Net::HTTP.post_form(Viddler.url, params))
     end
     
+    def videos_upload(file, options = {})
+      Viddler::Video.upload(self, file, options )
+    end
+    
+    def videos_get_details(video_id)
+      Viddler::Video.get_details(video_id, self)
+    end
+    
     class UnknownError < StandardError; end
     class BadArgumentFormat < StandardError; end
     class UnknownArgument < StandardError; end

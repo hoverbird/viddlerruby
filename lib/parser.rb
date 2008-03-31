@@ -26,7 +26,7 @@ module Viddler
 
     def self.hashinate(response_element)
       hash = {}
-      response_element.children.reject{|e| e.kind_of? Hpricot::Text}.each do |elem|
+      response_element.children.reject!{|e| e.kind_of? Hpricot::Text }.each do |elem|
         hash[elem.name.to_sym] = elem.inner_html
       end
       hash
@@ -44,9 +44,16 @@ module Viddler
       end
     end
     
+    class VideosGetDetails < Parser
+      def self.process(data)
+        hashinate(element("video", data))
+      end
+    end
+    
     PARSERS = {
       'viddler.users.auth' => UsersAuth,
-      'viddler.videos.upload' => VideosUpload
+      'viddler.videos.upload' => VideosUpload,
+      'viddler.videos.getDetails' => VideosGetDetails
     }
     
     class Errors < Parser

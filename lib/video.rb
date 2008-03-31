@@ -1,14 +1,20 @@
 module Viddler
   class Video
-    attr_accessor :upload_time, :permissions, :comment_count, :title, :url, :thumbnail_url, :description, :tags, :author, :length_seconds, :view_count, :id
+    attr_accessor :upload_time, :permissions, :comment_list, :comment_count, :title, :url, :thumbnail_url,
+                  :description, :tags, :author, :length_seconds, :view_count, :id, :update_time
         
-    def self.post(session, file_data, options = {})
+    def self.upload(session, file_data, options = {})
       multipart_file = Net::HTTP::MultipartPostFile.new("temp", 'video/quicktime', file_data)
       args = {:method => 'viddler.videos.upload', :api_key => session.api_key, :sessionid => session.session_id, :file => multipart_file, :title => "Test"}.merge!(options)
-      # raise args.keys.inspect
       response = Net::HTTP.post_multipart_form(Viddler.url, args)
-      # debugger
       new(Viddler::Parser.parse( args[:method], response ))
+    end
+    
+    def self.get_details(video_id, session = nil)
+      args = {:method => 'viddler.videos.getDetails'}
+      args.merge!(:api_key => session.api_key, :sessionid => session.session_id) if session
+      response = Net::HTTP.get(Viddler.url, args)
+      new Viddler::Parser.parse(args[:method], response)
     end
     
     def initialize(hash)
@@ -16,8 +22,7 @@ module Viddler
         self.__send__("#{key}=", value)
       end
       raise ArgumentError if id.nil? || url.nil?
-    end
-    
+    end   
     
     def permissions
       Struct.new(:view_level)

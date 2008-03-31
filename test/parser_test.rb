@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/test_helper.rb'
 
-context "Parsing a Video response" do
+context "Parsing a Video upload response" do
   setup do
     @parsed = Viddler::Parser.parse( 'viddler.videos.upload', example_video_upload_response_xml )
   end

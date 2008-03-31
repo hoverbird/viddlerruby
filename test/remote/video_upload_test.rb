@@ -5,7 +5,7 @@ context "Uploading a new Video" do
   setup do
     @session = Viddler::Session.create()    
     @data =  File.read(File.dirname(__FILE__) + "/test.mov")
-    @video = Viddler::Video.post(@session, @data, {  :title => "A Radool API Test Video",
+    @video = Viddler::Video.upload(@session, @data, {  :title => "A Radool API Test Video",
                                                      :description => "Ain't it swell?",
                                                      :tags => 'not_for_reals test api',
                                                      :make_public => false } )
