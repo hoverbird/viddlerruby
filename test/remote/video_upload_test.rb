@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper.rb'
 
-context "Uploading a new Video" do
+context "Uploading a new video" do
   
   setup do
     @session = Viddler::Session.create()    

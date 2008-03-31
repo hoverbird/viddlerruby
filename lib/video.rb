@@ -13,7 +13,7 @@ module Viddler
     def self.get_details(video_id, session = nil)
       args = {:method => 'viddler.videos.getDetails'}
       args.merge!(:api_key => session.api_key, :sessionid => session.session_id) if session
-      response = Net::HTTP.get(Viddler.url, args)
+      response = Net::HTTP.get_response(API_END_POINT, args)
       new Viddler::Parser.parse(args[:method], response)
     end
     
