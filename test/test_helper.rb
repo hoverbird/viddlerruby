@@ -7,8 +7,8 @@ rescue LoadError
   abort "=> You need the mocha, test-spec and ruby-debug gems to run these tests."
 end
 
-$:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
-require 'viddler'
+$:.unshift File.join(File.dirname(__FILE__), '..')
+require 'init'
 
 class Test::Unit::TestCase
   private

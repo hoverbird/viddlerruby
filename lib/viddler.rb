@@ -1,13 +1,4 @@
 module Viddler
-  require 'hpricot'
-  require 'net/http_multipart_post'
-  require 'net/http'
-  require 'uri'
-  
-
-  require 'session'
-  require 'video'
-  require 'parser'
 
   API_END_POINT = 'http://api.viddler.com/rest/v1/'
   

@@ -1,19 +1,28 @@
 module Viddler
   class Video
+    DEBUG = true
+    REQUIRED_PARAMS = :title, :description, :make_public, :tags
+    
     attr_accessor :upload_time, :permissions, :comment_list, :comment_count, :title, :url, :thumbnail_url,
                   :description, :tags, :author, :length_seconds, :view_count, :id, :update_time
         
-    def self.upload(session, file_data, options = {})
+    def self.upload(session, file_data, options = {:make_public => false})
+      raise ArgumentError if REQUIRED_PARAMS.any?{|param| options[param].nil?}
+      
       multipart_file = Net::HTTP::MultipartPostFile.new("temp", 'video/quicktime', file_data)
-      args = {:method => 'viddler.videos.upload', :api_key => session.api_key, :sessionid => session.session_id, :file => multipart_file, :title => "Test"}.merge!(options)
+      args = {:method => 'viddler.videos.upload', :api_key => session.api_key, :sessionid => session.session_id, :file => multipart_file}.merge!(options)
       response = Net::HTTP.post_multipart_form(Viddler.url, args)
+      puts args.inspect if DEBUG
+      puts response.inspect if DEBUG
       new(Viddler::Parser.parse( args[:method], response ))
     end
     
     def self.get_details(video_id, session = nil)
       args = {:method => 'viddler.videos.getDetails'}
       args.merge!(:api_key => session.api_key, :sessionid => session.session_id) if session
-      response = Net::HTTP.get_response(API_END_POINT, args)
+      puts args if DEBUG
+      
+      response = Net::HTTP.get_response(Viddler.url, args)
       new Viddler::Parser.parse(args[:method], response)
     end
     

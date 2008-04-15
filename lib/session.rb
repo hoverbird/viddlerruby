@@ -20,7 +20,7 @@ module Viddler
     end
     
     def videos_upload(file, options = {})
-      Viddler::Video.upload(self, file, options )
+      Viddler::Video.upload(self, file.read, options )
     end
     
     def videos_get_details(video_id)
