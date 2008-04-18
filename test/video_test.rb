@@ -37,6 +37,25 @@ context "Getting a Video's details" do
   
   specify "should set the title of the Video" do
     @video.title.should.equal "My video"
+  end  
+end
+
+context "Getting all video info by User" do
+  setup do 
+    Net::HTTP.expects(:get).returns(example_video_get_by_user_response_xml)
+    @videos = Viddler::Video.get_by_user('gourmetlibrary')
   end
   
+  specify "should return an Array of video objects" do
+    @videos.should.be.kind_of? Array    
+    @videos.each do |video|
+      video.should.be.kind_of? Viddler::Video
+    end
+  end
+  
+  specify "should set the title of each video returned" do
+    @videos[0].title.should.equal "Rocketsauce"
+    @videos[1].title.should.equal "Sasquatch"
+  end
 end
+

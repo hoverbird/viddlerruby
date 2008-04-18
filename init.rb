@@ -4,7 +4,7 @@ require 'viddler'
 require 'session'
 require 'video'
 require 'parser'
-require 'rails/controller' if RAILS_ENV
+#require 'rails/controller'
 
 require 'rubygems'
 require 'hpricot'

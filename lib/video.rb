@@ -15,9 +15,18 @@ module Viddler
     def self.get_details(video_id, session = nil)
       args = {:method => 'viddler.videos.getDetails', :video_id => video_id}
       args.merge!(:api_key => session.api_key, :sessionid => session.session_id) if session
-      url = Viddler.url(args)
-      response = Net::HTTP.get(url)
+      response = Net::HTTP.get(Viddler.url(args))
       new Viddler::Parser.parse(args[:method], response)
+    end
+    
+    def self.get_by_user(user, session = nil, options = {})
+      args = {:method => 'viddler.videos.getByUser', :user => user}
+      args.merge!(:api_key => session.api_key, :sessionid => session.session_id) if session
+      args.merge!(options)
+      response = Net::HTTP.get( Viddler.url(args) )
+      Viddler::Parser.parse(args[:method], response).collect do |video_attr_hash|
+        new(video_attr_hash)
+      end
     end
     
     def initialize(hash)

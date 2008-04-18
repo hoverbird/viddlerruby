@@ -88,4 +88,36 @@ class Test::Unit::TestCase
     </video>
     XML
   end
+  
+  def example_video_get_by_user_response_xml
+    <<-XML
+    <?xml version="1.0" encoding="UTF-8"?>
+    <video_list total="25">
+      <video>
+        <author>gourmet!</author>
+        <id>666</id>
+        <title>Rocketsauce</title>
+        <length_seconds>188</length_seconds>
+        <description></description>
+        <view_count>121</view_count>
+        <upload_time>1195445607000</upload_time>
+        <comment_count>0</comment_count>
+        <url>http://www.viddler.com/explore/username/videos/111/</url>
+        <thumbnail_url>http://cdn-ll-79.viddler.com/e2/thumbnail_2_25304271.jpg</thumbnail_url>
+      </video>
+      <video>
+        <author>username</author>
+        <id>32104119</id>
+        <title>Sasquatch</title>
+        <length_seconds>188</length_seconds>
+        <description></description>
+        <view_count>121</view_count>
+        <upload_time>1195445607000</upload_time>
+        <comment_count>0</comment_count>
+        <url>http://www.viddler.com/explore/username/videos/111/</url>
+        <thumbnail_url>http://cdn-ll-79.viddler.com/e2/thumbnail_2_25304271.jpg</thumbnail_url>
+      </video>
+    </video_list>
+    XML
+  end
 end

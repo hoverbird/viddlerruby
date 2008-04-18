@@ -16,6 +16,16 @@ module Viddler
       raise "Element #{name} not found in #{data}"
     end
     
+    def self.array_of_hashes(array_name, element_name, data)
+      data = data.body rescue data # either data or an HTTP response
+      doc = Hpricot.XML(data)
+      array = []
+      doc.search(array_name).search(element_name).each do |element|
+        array << hashinate(element)
+      end
+      array
+    end
+    
     def self.hash_or_value_for(element)
       if element.children.size == 1 && element.children.first.kind_of?(REXML::Text)
         element.text_value
@@ -50,11 +60,18 @@ module Viddler
       end
     end
     
+    class VideosGetByUser< Parser
+      def self.process(data)
+        array_of_hashes('video_list', 'video', data)
+      end
+    end
+    
     PARSERS = {
-      'viddler.users.auth' => UsersAuth,
-      'viddler.videos.upload' => VideosUpload,
-      'viddler.videos.getDetails' => VideosGetDetails
-    }
+       'viddler.users.auth' => UsersAuth,
+       'viddler.videos.upload' => VideosUpload,
+       'viddler.videos.getDetails' => VideosGetDetails,
+       'viddler.videos.getByUser' => VideosGetByUser
+     }
     
     class Errors < Parser
       EXCEPTIONS = {
