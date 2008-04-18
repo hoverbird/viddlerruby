@@ -8,7 +8,7 @@ module Viddler
       multipart_file = Net::HTTP::MultipartPostFile.new(options[:title], 'video/quicktime', file_data)
       args = {:method => 'viddler.videos.upload', :api_key => session.api_key, :sessionid => session.session_id, :file => multipart_file}.merge!(options)
       
-      response = Net::HTTP.post_multipart_form(Viddler.url(args))
+      response = Net::HTTP.post_multipart_form( Viddler.url(),args )
       new(Viddler::Parser.parse( args[:method], response ))
     end
     
