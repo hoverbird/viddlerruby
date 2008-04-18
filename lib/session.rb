@@ -27,8 +27,8 @@ module Viddler
       Viddler::Video.get_details(video_id, self)
     end
     
-    def videos_get_by_user(username)
-      Viddler::Video.get_by_user(username, self)
+    def videos_get_by_user(username, options = {})
+      Viddler::Video.get_by_user(username, self, options)
     end
     
     class UnknownError < StandardError; end
