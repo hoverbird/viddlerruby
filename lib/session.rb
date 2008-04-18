@@ -16,7 +16,7 @@ module Viddler
     end
     
     def post(params)
-      Viddler::Parser.parse(params[:method], Net::HTTP.post_form(Viddler.url, params))
+      Viddler::Parser.parse( params[:method], Net::HTTP.post_form(Viddler.url(params)) )
     end
     
     def videos_upload(file, options = {})

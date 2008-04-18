@@ -6,7 +6,7 @@ module Viddler
       end
 
       def new_viddler_session
-        @viddler_session = Viddler::Session.create() 
+        Viddler::Session.create() 
       end
     end
   end

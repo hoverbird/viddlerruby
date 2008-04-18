@@ -11,8 +11,6 @@ context "Getting info on a video" do
   end
   
   specify "should connect to Viddler" do
-    res = Net::HTTP.new(Viddler.url).get("?method=viddler.videos.getDetailsByUrl&api_key=#{@session.api_key}&url=http://www.viddler.com/explore/username/videos/10/")
-    debugger
-    bogus_change = "totes"
+    res = Net::HTTP.new(Viddler.url("?method=viddler.videos.getDetailsByUrl&api_key=#{@session.api_key}&url=http://www.viddler.com/explore/username/videos/10/")).get
   end
 end
