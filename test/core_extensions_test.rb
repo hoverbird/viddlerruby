@@ -8,4 +8,8 @@ context "Encoding a Hash as URL parameters" do
     params.url_encode.should.equal "bacon=chunky%20style&meaning_of_life=42"
   end
 
+  specify "should return an emptu string if passed an empty hash" do
+    {}.url_encode.should.equal ""
+  end
+
 end
