@@ -9,7 +9,7 @@ context "Uploading a new Video" do
     @session_mock.expects(:session_id).returns('987654321')
       
     Net::HTTP.expects(:post_multipart_form).returns(example_video_upload_response_xml)
-    @video = Viddler::Video.upload(@session_mock, @file_mock, {:title => "Faking out a File Upload", :tags => 'fake'} )
+    @video = Viddler::Video.upload(@session_mock, @file_mock, {:title => "Faking out a File Upload", :tags => 'fake', :description=> 'blah', :make_public => true} )
   end
   
   specify "should return a Video object" do

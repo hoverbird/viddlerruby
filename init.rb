@@ -5,6 +5,7 @@ require 'net/http_multipart_post'
 require 'uri'
 
 $:.unshift "lib"
+require 'core_extensions'
 require 'viddler'
 require 'session'
 require 'video'
