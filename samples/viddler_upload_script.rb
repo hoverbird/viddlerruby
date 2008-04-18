@@ -13,9 +13,9 @@ working_dir.each do |filename|
                                               :description => "http://gourmetlibrary.com/products/#{filename}", 
                                               :tags => 'gourmetlibrary gourmet food',
                                               :make_public => 0 )
-    upload_log << "#{filename}: #{video.inspect}\n"
+    upload_log << "#{filename}: worked\n"
   else
-    upload_log << "Error uploading #{filename}\n" 
+    upload_log << "FAIL #{filename}\n" 
   end
 
 end

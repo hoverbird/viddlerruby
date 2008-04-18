@@ -1,5 +1,5 @@
 class Hash  
-  def url_encode  
+  def url_encode
     output = ''  
     each do |name,value|  
       output += '&' if !output.empty?  
