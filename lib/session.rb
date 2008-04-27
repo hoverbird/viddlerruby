@@ -43,6 +43,8 @@ module Viddler
     class HTTPMethodNotAllowed < StandardError; end
     class MethodRestrictedBySecurityLevel < StandardError; end
     class APIKeyDisabled < StandardError; end
+    class VideoNotFound < StandardError; end
+
     
   end
 end
