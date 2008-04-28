@@ -87,7 +87,8 @@ module Viddler
         10  => Viddler::Session::HTTPMethodNotAllowed,
         11  => Viddler::Session::MethodRestrictedBySecurityLevel,
         12  => Viddler::Session::APIKeyDisabled,
-        100 => Viddler::Session::VideoNotFound
+        100 => Viddler::Session::VideoNotFound,
+        101 => Viddler::Session::UsernameNotFound
       }
       
       def self.process(method, data)

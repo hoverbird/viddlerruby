@@ -1,7 +1,8 @@
 module Viddler
   class Video    
     attr_accessor :upload_time, :permissions, :comment_list, :comment_count, :title, :url, :thumbnail_url,
-                  :description, :tags, :author, :length_seconds, :view_count, :id, :update_time
+                  :description, :tags, :author, :length_seconds, :view_count, :id, :update_time,
+                  :height, :width
         
     def self.upload(session, file_data, options = {})
       raise ArgumentError if [:title, :description, :make_public, :tags].any?{|param| options[param].nil?}

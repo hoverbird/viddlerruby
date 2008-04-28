@@ -44,6 +44,7 @@ module Viddler
     class MethodRestrictedBySecurityLevel < StandardError; end
     class APIKeyDisabled < StandardError; end
     class VideoNotFound < StandardError; end
+    class UsernameNotFound < StandardError; end
 
     
   end
