@@ -1,5 +1,5 @@
 require 'init'
-viddler_api = Viddler::Session.create('0117f0f19d4b474f55524d45544c4942524152593bd', 'gourmetlibrary', 'cheeselib69')
+viddler_api = Viddler::Session.create('your_API_key', 'your_username', 'your_password')
 dirname = ARGV[-1] || ARGV.first
 Dir.chdir dirname
 

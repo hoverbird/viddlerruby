@@ -1,6 +1,6 @@
 MIT-LICENSE
-Manifest
 README
+Manifest
 Rakefile
 init.rb
 lib/core_extensions.rb
