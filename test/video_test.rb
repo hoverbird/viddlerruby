@@ -59,3 +59,14 @@ context "Getting all video info by User" do
   end
 end
 
+context "Destroying a video" do
+  setup do
+    Net::HTTP.expects(:get).returns(example_video_get_by_user_response_xml)
+    @destroyed = Viddler::Video.destroy(123456)
+  end
+  
+  specify "should return succesfully destroyed (on viddler's servers) video object" do
+    @destroyed.should.be.kind_of? Viddler::Video
+  end
+  
+end

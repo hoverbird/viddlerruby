@@ -88,7 +88,8 @@ module Viddler
         11  => Viddler::Session::MethodRestrictedBySecurityLevel,
         12  => Viddler::Session::APIKeyDisabled,
         100 => Viddler::Session::VideoNotFound,
-        101 => Viddler::Session::UsernameNotFound
+        101 => Viddler::Session::UsernameNotFound,
+        103 => Viddler::Session::PasswordIncorrect
       }
       
       def self.process(method, data)
@@ -97,7 +98,11 @@ module Viddler
           code = response_element.search('code').inner_html.to_i
           description = response_element.search('description').inner_html
           details = response_element.search('details').inner_html
-          raise EXCEPTIONS[code], "Error #{code} while executing #{method}: #{description}. #{details}"
+          if known_code = EXCEPTIONS[code]
+            raise known_code, "Error #{code} while executing #{method}: #{description}. #{details}"
+          else
+            raise EXCEPTIONS[1], "Error #{code} while executing #{method}: #{description}. #{details}"
+          end          
         end
       end
     end

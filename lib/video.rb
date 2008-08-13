@@ -2,7 +2,7 @@ module Viddler
   class Video    
     attr_accessor :upload_time, :permissions, :comment_list, :comment_count, :title, :url, :thumbnail_url,
                   :description, :tags, :author, :length_seconds, :view_count, :id, :update_time,
-                  :height, :width, :made_public_time
+                  :height, :width, :made_public_time, :permalink
         
     def self.upload(session, file_data, options = {})
       raise ArgumentError if [:title, :description, :make_public, :tags].any?{|param| options[param].nil?}
@@ -37,24 +37,6 @@ module Viddler
       end
       raise ArgumentError if id.nil? || url.nil?
     end   
-    
-    def permissions
-      Struct.new(:view_level)
-    end
-  #<permissions>
-  #  <view level="shared_all">
-  #    <secreturl>http://www.viddler.com/explore/username/videos/123/?secreturl=112635379</secreturl>
-  #  </view>
-  #  <embed level="shared">
-  #    <user>friend1</user>
-  #    <user>friend2</user>
-  #    <list>my buddy list1</list>
-  #  </embed>
-  #  <tagging level="shared">
-  #    <list>my buddy list2</list>
-  #  </tagging>
-  #  <commenting level="shared_all" />
-  #  <download level="shared_all" />
-  #</permissions>
   end
+
 end

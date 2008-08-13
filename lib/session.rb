@@ -45,7 +45,7 @@ module Viddler
     class APIKeyDisabled < StandardError; end
     class VideoNotFound < StandardError; end
     class UsernameNotFound < StandardError; end
-
+    class PasswordIncorrect < StandardError; end
     
   end
 end
