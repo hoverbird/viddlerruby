@@ -48,9 +48,9 @@ module Viddler
       end
     end
     
-    class VideosUpload < Parser
+    class VideosGetByUser< Parser
       def self.process(data)
-        hashinate(element("video", data))
+        array_of_hashes('video_list', 'video', data)
       end
     end
     
@@ -59,12 +59,8 @@ module Viddler
         hashinate(element("video", data))
       end
     end
-    
-    class VideosGetByUser< Parser
-      def self.process(data)
-        array_of_hashes('video_list', 'video', data)
-      end
-    end
+    class VideosUpload < VideosGetDetails; end
+    class VideosDelete < VideosGetDetails; end
     
     PARSERS = {
        'viddler.users.auth' => UsersAuth,

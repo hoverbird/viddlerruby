@@ -19,8 +19,12 @@ module Viddler
       Viddler::Parser.parse( params[:method], Net::HTTP.post_form(Viddler.url(), params) )
     end
     
-    def videos_upload(file, options = {})
-      Viddler::Video.upload(self, file.read, options )
+    def videos_upload(file_or_data, options = {})
+      Viddler::Video.upload(file_or_data, self, options )
+    end
+    
+    def videos_delete(id, options = {})
+      Viddler::Video.delete(id, self)
     end
     
     def videos_get_details(video_id)
