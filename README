@@ -1,6 +1,6 @@
 Viddler Ruby
 ============
 
-A Ruby wrapper for the Viddler API. Currently handles uploading videos to Viddler, reading and updating metadata and basic permissions, and deleting videos.
+A Ruby wrapper for the Viddler API. Currently handles uploading videos to Viddler, getting and setting metadata and permissions, and deleting videos.
 
 Copyright (c) 2008 Patrick Ewing, released under the MIT license
