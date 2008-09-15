@@ -41,6 +41,11 @@ class Test::Unit::TestCase
     XML
   end
   
+  def example_success_response_xml
+    '<?xml version="1.0" encoding="UTF-8"?>
+    <success />'
+  end
+  
   def example_video_details_response_xml
     <<-XML
     <?xml version="1.0" encoding="UTF-8"?>

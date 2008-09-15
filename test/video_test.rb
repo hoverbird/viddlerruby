@@ -9,7 +9,7 @@ context "Uploading a new Video" do
     @session_mock.expects(:session_id).returns('987654321')
       
     Net::HTTP.expects(:post_multipart_form).returns(example_video_upload_response_xml)
-    @video = Viddler::Video.upload(@session_mock, @file_mock, {:title => "Faking out a File Upload", :tags => 'fake', :description=> 'blah', :make_public => true} )
+    @video = Viddler::Video.upload(@file_mock,@session_mock,  {:title => "Faking out a File Upload", :tags => 'fake', :description=> 'blah', :make_public => true} )
   end
   
   specify "should return a Video object" do
@@ -57,18 +57,5 @@ context "Getting all video info by User" do
     @videos[0].title.should.equal "Rocketsauce"
     @videos[1].title.should.equal "Sasquatch"
   end
-end
-
-context "Deleting a video" do
-  setup do
-    Net::HTTP.expects(:get).returns(example_video_get_by_user_response_xml)
-    @deleted = Viddler::Video.delete(123456)
-  end
-  
-  specify "should return destroyed (on viddler's servers) video object" do
-    @deleted.should.be.kind_of? Viddler::Video
-  end
-  
-  
   
 end

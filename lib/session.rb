@@ -23,12 +23,16 @@ module Viddler
       Viddler::Video.upload(file_or_data, self, options )
     end
     
-    def videos_delete(id, options = {})
+    def videos_delete(id)
       Viddler::Video.delete(id, self)
     end
     
-    def videos_get_details(video_id)
-      Viddler::Video.get_details(video_id, self)
+    def videos_get_details(id)
+      Viddler::Video.get_details(id, self)
+    end
+    
+    def videos_set_details(id, options = {})
+      Viddler::Video.set_details(id, self, options)
     end
     
     def videos_get_by_user(username, options = {})

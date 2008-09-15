@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper.rb'
 
-# we're stubbing nothing here, to test transport mechaninism, real-world usage
+# we're stubbing nothing here. testing real-world usage, requires internet connection, calls may not be idempotent
 context "Remote API calls" do
   setup do
     @session = Viddler::Session.create()    
@@ -13,15 +13,21 @@ context "Remote API calls" do
     @video.title.should.equal "This is a Radool API Test Video"
   end
   
-  specify "can fetch details of previously uploaded videso, returning a Video object" do
+  specify "can fetch details of previously uploaded video, returning a Video object" do
     fetched = @session.videos_get_details(@video.id)
     fetched.should.be.kind_of? Viddler::Video
     fetched.id.should.equal @video.id
   end
   
+  specify "can set details of an existing video, returning an updated Video object" do
+    current_title = @video.title
+    updated = @session.videos_set_details(@video.id, {:title => current_title + '!'})
+    updated.title.should.equal current_title + '!'
+  end
+  
   specify "deleting a video should return destroyed (on viddler's servers) video object" do
-    deleted = @session.videos_delete(@video.id)
-    deleted.should.be.kind_of? Viddler::Video
+    response = @session.videos_delete(@video.id)
+    response.should.be :success
   end
   
 end
