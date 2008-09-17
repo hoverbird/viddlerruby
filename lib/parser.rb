@@ -60,12 +60,19 @@ module Viddler
       end
     end
     
+    class SimpleSuccess < Parser
+      def self.process(data)
+        element("success", data).inner_html
+      end
+    end
+    
     PARSERS = {
        'viddler.users.auth'        => UsersAuth,
        'viddler.videos.upload'     => VideoDetails,
        'viddler.videos.getDetails' => VideoDetails,
        'viddler.videos.setDetails' => VideoDetails,
-       'viddler.videos.getByUser'  => VideosGetByUser
+       'viddler.videos.getByUser'  => VideosGetByUser,
+       'viddler.videos.delete'     => SimpleSuccess
      }
     
     class Errors < Parser

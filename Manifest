@@ -20,10 +20,4 @@ test/remote/session_test.rb
 test/remote/test.mov
 test/remote/video_test.rb
 test/remote/video_upload_test.rb
-
-
-
-
-
-
 viddlerruby.gemspec
