@@ -27,7 +27,8 @@ context "Remote API calls" do
   
   specify "deleting a video should return destroyed (on viddler's servers) video object" do
     response = @session.videos_delete(@video.id)
-    response.should.be :success
+    debugger
+    response.should.equal "success"
   end
   
 end

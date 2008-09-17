@@ -4,10 +4,7 @@ context "Uploading a new Video" do
   
   setup do
     @file_mock = mock('file')
-    @session_mock = mock('session')
-    @session_mock.expects(:api_key).returns('123456789')
-    @session_mock.expects(:session_id).returns('987654321')
-      
+    mock_session
     Net::HTTP.expects(:post_multipart_form).returns(example_video_upload_response_xml)
     @video = Viddler::Video.upload(@file_mock,@session_mock,  {:title => "Faking out a File Upload", :tags => 'fake', :description=> 'blah', :make_public => true} )
   end
@@ -26,9 +23,9 @@ context "Uploading a new Video" do
 end
 
 context "Getting a Video's details" do
-  setup do 
+  setup do
     Net::HTTP.expects(:get).returns(example_video_details_response_xml)
-    @video = Viddler::Video.get_details(33)
+    @video = Viddler::Video.get_details(33,mock_session)
   end
   
   specify "should return a video object" do
@@ -58,4 +55,20 @@ context "Getting all video info by User" do
     @videos[1].title.should.equal "Sasquatch"
   end
   
+end
+
+context "Deleting a Video" do
+  setup do 
+    @session_mock = mock('session')
+    @session_mock.expects(:api_key).returns('123456789')
+    @session_mock.expects(:session_id).returns('987654321')
+    @session_mock.expects('post').with(:video_id => 33, :api_key => '123456789', :method => 'viddler.videos.delete', :sessionid => '987654321')
+    
+    Net::HTTP.expects(:post).returns(example_success_response_xml)
+  end
+  
+  specify "should return a success response" do
+    Viddler::Video.delete(33, @session_mock).should.be 'success'
+  end
+
 end

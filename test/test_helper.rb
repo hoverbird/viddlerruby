@@ -18,6 +18,13 @@ class Test::Unit::TestCase
     mock
   end
   
+  def mock_session
+    @session_mock = mock('session')
+    @session_mock.expects(:api_key).returns('123456789')
+    @session_mock.expects(:session_id).returns('987654321')
+    @session_mock
+  end
+  
   def example_auth_response_xml
     <<-XML
     <?xml version="1.0" encoding="UTF-8"?>

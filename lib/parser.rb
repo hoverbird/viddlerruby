@@ -60,10 +60,8 @@ module Viddler
       end
     end
     
-    class SimpleSuccess < Parser
-      def self.process(data)
-        element("success", data).inner_html
-      end
+    class SimpleResponse < Parser
+      def self.process(data); data; end
     end
     
     PARSERS = {
@@ -72,7 +70,7 @@ module Viddler
        'viddler.videos.getDetails' => VideoDetails,
        'viddler.videos.setDetails' => VideoDetails,
        'viddler.videos.getByUser'  => VideosGetByUser,
-       'viddler.videos.delete'     => SimpleSuccess
+       'viddler.videos.delete'     => SimpleResponse
      }
     
     class Errors < Parser
