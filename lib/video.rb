@@ -20,7 +20,7 @@ module Viddler
     end
     
     def self.get_by_user(user, session = nil, options = {})
-      args = merge_session_args({:method => 'viddler.videos.getByUser', :user => user}, session)
+      args = merge_session_args({:method => 'viddler.videos.getByUser', :user => user}, session, options)
       response = Net::HTTP.get( Viddler.url(args) )
       vids = Viddler::Parser.parse(args[:method], response).collect do |video_attr_hash|
         new(video_attr_hash)
